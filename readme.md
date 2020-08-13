@@ -1,9 +1,7 @@
 # Companion post:
 
 # Description
-Add basic static, out of the box, health checks. These are nothing fancy.
-
-This only returns the final state, they don't return individual health check results.
+The added nuget package and options will cause the health check endpoints to return a JSON object containing information about each health check that was ran.
 
 # Urls
 * `/hc/ping`

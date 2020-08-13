@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
@@ -53,11 +54,13 @@ namespace Vecc.HealthCheckExample
             {
                 endpoints.MapHealthChecks("/hc/ping", new HealthCheckOptions
                 {
-                    Predicate = check => check.Tags.Contains("ping")
+                    Predicate = check => check.Tags.Contains("ping"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
                 endpoints.MapHealthChecks("/hc/remote", new HealthCheckOptions
                 {
-                    Predicate = check => check.Tags.Contains("remote")
+                    Predicate = check => check.Tags.Contains("remote"),
+                    ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
                 endpoints.MapControllerRoute(
                     name: "default",
