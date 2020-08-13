@@ -30,7 +30,9 @@ namespace Vecc.HealthCheckExample
                 .AddCheck("ping", () => new HealthCheckResult(HealthStatus.Healthy, "pong"), new string[] { "ping" })
                 .AddCheck("remote1", () => new HealthCheckResult(HealthStatus.Healthy, "always healthy"), new string[] { "remote" })
                 .AddCheck("remote2", () => new HealthCheckResult(HealthStatus.Degraded, "always degraded"), new string[] { "remote" })
-                .AddCheck("remote3", () => new HealthCheckResult(HealthStatus.Unhealthy, "always unhealthy"), new string[] { "remote" });
+                .AddCheck("remote3", () => new HealthCheckResult(HealthStatus.Unhealthy, "always unhealthy"), new string[] { "remote" })
+                .AddUrlGroup(new Uri("https://idontexist.frakkingsweet.com"), "broken", HealthStatus.Unhealthy, new string[] { "remote" })
+                .AddUrlGroup(new Uri("https://www.google.com"), "google", HealthStatus.Degraded, new string[] { "remote" });
 
             services.AddHealthChecksUI((options)=>
             {

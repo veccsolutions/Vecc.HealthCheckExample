@@ -1,7 +1,5 @@
-# Companion post:
-
 # Description
-The added nuget package and service assignments and endpoint will add a nice UI over the health checks so you can easily see what the status is.
+The added nuget package and code do a simple check against a URI.
 
 # Urls
 * `/hc/ping`
