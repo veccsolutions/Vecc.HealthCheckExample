@@ -1,8 +1,7 @@
-# Companion post:
-
 # Description
-The added nuget package and options will cause the health check endpoints to return a JSON object containing information about each health check that was ran.
+The added nuget package and service assignments and endpoint will add a nice UI over the health checks so you can easily see what the status is.
 
 # Urls
 * `/hc/ping`
 * `/hc/remote`
+* `/healthchecks-ui`
