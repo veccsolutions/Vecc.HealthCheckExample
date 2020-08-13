@@ -31,6 +31,13 @@ namespace Vecc.HealthCheckExample
                 .AddCheck("remote1", () => new HealthCheckResult(HealthStatus.Healthy, "always healthy"), new string[] { "remote" })
                 .AddCheck("remote2", () => new HealthCheckResult(HealthStatus.Degraded, "always degraded"), new string[] { "remote" })
                 .AddCheck("remote3", () => new HealthCheckResult(HealthStatus.Unhealthy, "always unhealthy"), new string[] { "remote" });
+
+            services.AddHealthChecksUI((options)=>
+            {
+                options.AddHealthCheckEndpoint("ping", "/hc/ping");
+                options.AddHealthCheckEndpoint("remote", "/hc/remote");
+            })
+                .AddInMemoryStorage();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -62,6 +69,7 @@ namespace Vecc.HealthCheckExample
                     Predicate = check => check.Tags.Contains("remote"),
                     ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
                 });
+                endpoints.MapHealthChecksUI();
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
